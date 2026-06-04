@@ -1,3 +1,6 @@
+tasks = []
+
+
 def show_menu():
     print("\n===== TO-DO LIST APP =====")
     print("1. Add task")
@@ -7,13 +10,26 @@ def show_menu():
     print("5. Exit")
 
 
+def add_task():
+    title = input("Enter task title: ")
+
+    task = {
+        "id": len(tasks) + 1,
+        "title": title,
+        "done": False
+    }
+
+    tasks.append(task)
+    print("Task added successfully.")
+
+
 def main():
     while True:
         show_menu()
         choice = input("Choose an option: ")
 
         if choice == "1":
-            print("Add task feature coming soon...")
+            add_task()
         elif choice == "2":
             print("View tasks feature coming soon...")
         elif choice == "3":
