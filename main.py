@@ -22,6 +22,16 @@ def add_task():
     tasks.append(task)
     print("Task added successfully.")
 
+def view_tasks():
+    if not tasks:
+        print("No tasks found.")
+        return
+
+    print("\nYour tasks:")
+
+    for task in tasks:
+        status = "Done" if task["done"] else "Not done"
+        print(f'{task["id"]}. {task["title"]} - {status}')
 
 def main():
     while True:
@@ -31,7 +41,7 @@ def main():
         if choice == "1":
             add_task()
         elif choice == "2":
-            print("View tasks feature coming soon...")
+            view_tasks()
         elif choice == "3":
             print("Mark task as done feature coming soon...")
         elif choice == "4":
