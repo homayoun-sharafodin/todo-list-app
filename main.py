@@ -49,6 +49,27 @@ def save_tasks():
     with open(FILE_NAME, "w") as file:
         json.dump(tasks, file, indent=4)
 
+def mark_task_done():
+    view_tasks()
+
+    if not tasks:
+        return
+
+    try:
+        task_id = int(input("Enter task ID to mark as done: "))
+
+        for task in tasks:
+            if task["id"] == task_id:
+                task["done"] = True
+                save_tasks()
+                print("Task marked as done.")
+                return
+
+        print("Task not found.")
+
+    except ValueError:
+        print("Please enter a valid number.")
+
 def main():
     global tasks
     tasks = load_tasks()
@@ -62,7 +83,7 @@ def main():
         elif choice == "2":
             view_tasks()
         elif choice == "3":
-            print("Mark task as done feature coming soon...")
+            mark_task_done()
         elif choice == "4":
             print("Delete task feature coming soon...")
         elif choice == "5":
