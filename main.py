@@ -70,6 +70,27 @@ def mark_task_done():
     except ValueError:
         print("Please enter a valid number.")
 
+def delete_task():
+    view_tasks()
+
+    if not tasks:
+        return
+
+    try:
+        task_id = int(input("Enter task ID to delete: "))
+
+        for task in tasks:
+            if task["id"] == task_id:
+                tasks.remove(task)
+                save_tasks()
+                print("Task deleted successfully.")
+                return
+
+        print("Task not found.")
+
+    except ValueError:
+        print("Please enter a valid number.")
+
 def main():
     global tasks
     tasks = load_tasks()
@@ -85,7 +106,7 @@ def main():
         elif choice == "3":
             mark_task_done()
         elif choice == "4":
-            print("Delete task feature coming soon...")
+            delete_task()
         elif choice == "5":
             print("Goodbye!")
             break

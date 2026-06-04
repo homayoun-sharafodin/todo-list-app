@@ -1,7 +1,12 @@
 [
     {
         "id": 1,
-        "title": "chores",
+        "title": "studying",
         "done": true
+    },
+    {
+        "id": 2,
+        "title": "chores",
+        "done": false
     }
 ]
