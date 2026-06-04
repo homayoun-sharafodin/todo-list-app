@@ -1,3 +1,6 @@
+import json
+
+FILE_NAME = "tasks.json"
 tasks = []
 
 
@@ -20,6 +23,7 @@ def add_task():
     }
 
     tasks.append(task)
+    save_tasks()
     print("Task added successfully.")
 
 def view_tasks():
@@ -33,7 +37,22 @@ def view_tasks():
         status = "Done" if task["done"] else "Not done"
         print(f'{task["id"]}. {task["title"]} - {status}')
 
+def load_tasks():
+    try:
+        with open(FILE_NAME, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+
+def save_tasks():
+    with open(FILE_NAME, "w") as file:
+        json.dump(tasks, file, indent=4)
+
 def main():
+    global tasks
+    tasks = load_tasks()
+    
     while True:
         show_menu()
         choice = input("Choose an option: ")
