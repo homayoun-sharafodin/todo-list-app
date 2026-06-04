@@ -17,7 +17,7 @@ def add_task():
     title = input("Enter task title: ")
 
     task = {
-        "id": len(tasks) + 1,
+        "id": get_next_task_id(),
         "title": title,
         "done": False
     }
@@ -70,6 +70,16 @@ def mark_task_done():
     except ValueError:
         print("Please enter a valid number.")
 
+def get_next_task_id():
+    if not tasks:
+        return 1
+
+    return max(task["id"] for task in tasks) + 1
+
+def renumber_tasks():
+    for index, task in enumerate(tasks, start=1):
+        task["id"] = index
+
 def delete_task():
     view_tasks()
 
@@ -82,6 +92,7 @@ def delete_task():
         for task in tasks:
             if task["id"] == task_id:
                 tasks.remove(task)
+                renumber_tasks()
                 save_tasks()
                 print("Task deleted successfully.")
                 return
@@ -90,6 +101,7 @@ def delete_task():
 
     except ValueError:
         print("Please enter a valid number.")
+
 
 def main():
     global tasks
